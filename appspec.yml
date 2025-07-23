@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /var/www/laravel-app
+    destination: /tmp/deploy-source
 
 hooks:
   BeforeInstall:

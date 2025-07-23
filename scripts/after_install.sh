@@ -1,17 +1,24 @@
 #!/bin/bash
 
-cd /var/www/laravel-app || exit 1
+APP_DIR=/var/www/laravel-app
+SOURCE_DIR=/tmp/deploy-source
 
-echo "[after_install] running composer install..."
+# 1. 덮어쓰기
+cp -rf $SOURCE_DIR/* $APP_DIR/
+
+# 2. Laravel 설정
+cd $APP_DIR
 composer install --no-dev --optimize-autoloader
-
-echo "[after_install] setting permissions..."
-sudo chown -R nginx:nginx storage bootstrap/cache
-sudo chmod -R 775 storage bootstrap/cache
-
-echo "[after_install] running artisan commands..."
-php artisan migrate --force
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
+
+# 3. 퍼미션
+chown -R nginx:nginx $APP_DIR/storage $APP_DIR/bootstrap/cache
+chmod -R 775 $APP_DIR/storage $APP_DIR/bootstrap/cache
+
+# ✅ 4. 임시 배포 소스 삭제
+rm -rf $SOURCE_DIR
+
+echo "[Deploy] 배포 완료 및 /tmp/deploy-source 정리 완료"
 
