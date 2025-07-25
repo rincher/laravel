@@ -15,7 +15,7 @@ php artisan route:cache
 php artisan view:cache
 
 # 3. 퍼미션
-sudo chown -R nginx:nginx $APP_DIR/storage $APP_DIR/bootstrap/cache
+sudo chown -R apache:apache $APP_DIR/storage $APP_DIR/bootstrap/cache
 sudo chmod -R 775 $APP_DIR/storage $APP_DIR/bootstrap/cache
 
 # ✅ 4. 임시 배포 소스 삭제
