@@ -4,6 +4,7 @@ APP_DIR=/var/www/laravel-app
 SOURCE_DIR=/tmp/deploy-source
 
 # 1. 덮어쓰기
+chown -R ec2-user:ec2-user $SOURCE_DIR
 cp -rf $SOURCE_DIR/* $APP_DIR/
 
 # 2. Laravel 설정
@@ -14,9 +15,6 @@ php artisan route:cache
 php artisan view:cache
 
 # 3. 퍼미션
-chown -R ec2-user:ec2-user "${APP_DIR}"
-chmod +x scripts/*.sh
-
 chown -R nginx:nginx $APP_DIR/storage $APP_DIR/bootstrap/cache
 chmod -R 775 $APP_DIR/storage $APP_DIR/bootstrap/cache
 
