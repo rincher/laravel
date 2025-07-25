@@ -4,7 +4,6 @@ APP_DIR=/var/www/laravel-app
 SOURCE_DIR=/tmp/deploy-source
 
 # 1. 덮어쓰기
-chown -R ec2-user:ec2-user $SOURCE_DIR
 cp -rf $SOURCE_DIR/* $APP_DIR/
 
 # 2. Laravel 설정
