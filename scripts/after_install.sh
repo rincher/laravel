@@ -14,6 +14,9 @@ php artisan route:cache
 php artisan view:cache
 
 # 3. 퍼미션
+chown -R ec2-user:ec2-user "${APP_DIR}"
+chmod +x scripts/*.sh
+
 chown -R nginx:nginx $APP_DIR/storage $APP_DIR/bootstrap/cache
 chmod -R 775 $APP_DIR/storage $APP_DIR/bootstrap/cache
 
